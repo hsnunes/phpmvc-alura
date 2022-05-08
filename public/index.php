@@ -1,15 +1,20 @@
 <?php
 
-// require __DIR__ . '/../vendor/autoload.php';
+use Alura\Cursos\Controller\FormularioInsercao;
+use Alura\Cursos\Controller\ListarCursos;
+
+require __DIR__ . '/../vendor/autoload.php';
 
 $pathInfo = $_SERVER['PATH_INFO'];
 
 switch ($pathInfo) {
     case '/listar-cursos':
-        require 'listar-cursos.php';
+        $controlador = new ListarCursos();
+        $controlador->processaRequisicao();
         break;
     case '/novo-curso':
-        require 'formulario-novo-curso.php';
+        $controlador = new FormularioInsercao();
+        $controlador->processaRequisicao();
         break;
         
     default:
