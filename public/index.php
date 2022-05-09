@@ -1,27 +1,20 @@
 <?php
 
-use Alura\Cursos\Controller\FormularioInsercao;
-use Alura\Cursos\Controller\ListarCursos;
-use Alura\Cursos\Controller\Persistencia;
+use Alura\Cursos\Controller\InterfaceControladorRequisicao;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $pathInfo = $_SERVER['PATH_INFO'];
+$routes = require __DIR__ . '/../config/routes.php';
 
-switch ($pathInfo) {
-    case '/listar-cursos':
-        $controlador = new ListarCursos();
-        $controlador->processaRequisicao();
-        break;
-    case '/novo-curso':
-        $controlador = new FormularioInsercao();
-        $controlador->processaRequisicao();
-        break;
-    case '/salvar-curso':
-        $controlador = new Persistencia();
-        $controlador->processaRequisicao();
-        break;
-    default:
-        echo "Erro 404";
-        break;
+if ( !array_key_exists($pathInfo, $routes) ) {
+    http_response_code(404);
+    exit();
 }
+
+// Recebe o valor da key passado pela rota, trazendo o nome da classe
+$classeControladora = $routes[$pathInfo];
+// instancia a classe controladora
+/** @var InterfaceControladorRequisicao $controlador */
+$controlador = new $classeControladora();
+$controlador->processaRequisicao();
