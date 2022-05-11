@@ -22,6 +22,8 @@ class Exclusao implements InterfaceControladorRequisicao
 
         // Valida o parametro passado, caso falso ou null vai para lista
         if ( is_null($id) || $id === false ) {
+            $_SESSION['mensagem'] = 'Curso Desconhecido!';
+            $_SESSION['tipo_mensagem'] = 'danger';
             header('Location: /listar-cursos', true, 301);
             return;
         }
@@ -30,6 +32,8 @@ class Exclusao implements InterfaceControladorRequisicao
         $curso = $this->entityManager->getReference(Curso::class, $id);
         $this->entityManager->remove($curso);
         $this->entityManager->flush();
+        $_SESSION['mensagem'] = 'Curso Excluido com sucesso!';
+        $_SESSION['tipo_mensagem'] = 'info';
         header('Location: /listar-cursos');
 
     }

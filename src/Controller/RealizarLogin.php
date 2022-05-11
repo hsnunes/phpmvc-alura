@@ -22,7 +22,9 @@ class RealizarLogin implements InterfaceControladorRequisicao
         
         // Veirica o email
         if (is_null($email) || $email === false) {
-            echo "Email invalido";
+            $_SESSION['tipo_mensagem'] = 'danger';
+            $_SESSION['mensagem'] = "Email invalido!";
+            header('Location: /login');
             exit;
         }
 
@@ -35,7 +37,9 @@ class RealizarLogin implements InterfaceControladorRequisicao
         ]);
 
         if (is_null($usuario) || !$usuario->senhaEstaCorreta($senha)) {
-            echo 'Email ou Senha incorretos';
+            $_SESSION['tipo_mensagem'] = 'danger';
+            $_SESSION['mensagem'] = 'Email ou Senha incorretos';
+            header('Location: /login');
             return;
         }
 
