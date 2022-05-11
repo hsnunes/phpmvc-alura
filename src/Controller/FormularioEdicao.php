@@ -3,11 +3,16 @@
 namespace Alura\Cursos\Controller;
 
 use Alura\Cursos\Entity\Curso;
-use Alura\Cursos\Controller\ControllerHtml;
+// use Alura\Cursos\Controller\ControllerHtml;
+use Alura\Cursos\Helper\RenderizadorHtmlTrait;
 use Alura\Cursos\Infra\EntityManagerCreator;
 
-class FormularioEdicao extends ControllerHtml implements InterfaceControladorRequisicao
+// ControllerHtml Substituido pela Trait
+// class FormularioEdicao extends ControllerHtml implements InterfaceControladorRequisicao
+class FormularioEdicao implements InterfaceControladorRequisicao
 {
+    use RenderizadorHtmlTrait;
+
     /** @var \Doctrine\Common\Persistence\ObjectRepository */
     private $repositorioCursos;
 

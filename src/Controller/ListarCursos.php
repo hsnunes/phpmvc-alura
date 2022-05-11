@@ -4,10 +4,14 @@ namespace Alura\Cursos\Controller;
 
 use Alura\Cursos\Entity\Curso;
 use Alura\Cursos\Controller\ControllerHtml;
+use Alura\Cursos\Helper\RenderizadorHtmlTrait;
 use Alura\Cursos\Infra\EntityManagerCreator;
 
-class ListarCursos extends ControllerHtml implements InterfaceControladorRequisicao
+// class ListarCursos extends ControllerHtml implements InterfaceControladorRequisicao
+class ListarCursos implements InterfaceControladorRequisicao
 {
+
+    use RenderizadorHtmlTrait;
 
     private $repositorioDeCursos;
 
@@ -24,6 +28,7 @@ class ListarCursos extends ControllerHtml implements InterfaceControladorRequisi
         // $titulo = 'Lista de Cursos';
         // require __DIR__ . '/../../view/cursos/listar-cursos.php';
 
+        // Método tbm da Trait RenderizdorHtml
         echo $this->renderizaHtml('cursos/listar-cursos.php', [
             'cursos' => $cursos,
             'titulo' => 'Lista de Cursos'

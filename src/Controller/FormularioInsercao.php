@@ -3,9 +3,13 @@
 namespace Alura\Cursos\Controller;
 
 use Alura\Cursos\Controller\ControllerHtml;
+use Alura\Cursos\Helper\RenderizadorHtmlTrait;
 
-class FormularioInsercao extends ControllerHtml implements InterfaceControladorRequisicao
+class FormularioInsercao implements InterfaceControladorRequisicao
 {
+
+    use RenderizadorHtmlTrait;
+
     public function processaRequisicao(): void
     {
         // $titulo = 'Novo Curso';
