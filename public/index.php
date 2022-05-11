@@ -12,6 +12,19 @@ if ( !array_key_exists($pathInfo, $routes) ) {
     exit();
 }
 
+session_start();
+
+// Escapando as rotas com login, para serem acessada normalmente
+//$isLogin = stripos($pathInfo, 'login');
+// Nova função do php8, testando!
+$isRouteOfLogin = str_contains($pathInfo, 'login');
+
+// Verificação de usuarios logados com a session[logado]
+if ( !isset($_SESSION["logado"]) && $isRouteOfLogin === false ) {
+    header( 'Location: /login' );
+    exit();
+}
+
 // Recebe o valor da key passado pela rota, trazendo o nome da classe
 $classeControladora = $routes[$pathInfo];
 // instancia a classe controladora
